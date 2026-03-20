@@ -1,0 +1,30 @@
+## Enumeration
+- As usual, we run an nmap scan:
+	- We find that we have 2 tcp ports open, ssh and http
+- First we open the website and look for the domain they are using to add to our /etc/hosts
+	- We find board.htb
+- Now we play around with the website and look for something we can use to get in
+	- There is a contact page input and Newsletter input
+	- They don't seem to reflect anything back to work with atm
+- Lets try some subdomain bruteforcing with gobuster
+	- `gobuster vhost -u http://board.htb -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain`
+	- The --append-domain is important or it wont actually add the domain at the end to find the subdomains
+	- Now we a subdomain crm.board.htb
+- We add the subdomain to /etc/hosts and open it
+	- we find a log in page running dolibarr 17.0.0
+	- first thing that comes to mind is trying some basic username and passwords
+		- for some reason it logged me in  but doesn't give me access
+		- My session is apparently not authenticated, probably has to do with a token or a cookie in the request.
+		- Lets open burpsuite and see whats going on
+		- There is a token that gets sent with the post request
+		- let's just move on to looking for a cve since we conveniently have the version number anyways.
+	- if that doesn't work we can look for cve's
+		- found a cve that gives us a remote shell
+	- found a  conf.php file that has a user and password
+		- dolibarrowner
+		- serverfun2$2023!!
+		- `mysql -u dolibarrowner -h 127.0.0.1 -P 3306 -p'serverfun2$2023!!'`
+		- turns out im doing too much, and i should just check if they reuse this password for larissa user.
+	- Then we look at the desktop environment being used
+		- Which is Enlightenment, and the version found has a cve that we could use to escalate.
+		- Found a poc, downloaded it and ran it on the machine and it gave us root.

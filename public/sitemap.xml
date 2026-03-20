@@ -2,12 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/android_malware/edalat.apk/</loc>
+  </url><url>
+    <loc>http://localhost:1313/android_malware/freefollowers.apk/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ctfs/blackhat-mea-qualification-2025/cute_csp/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ctfs/imaginaryctf-2025/imaginary-notes-web/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ctfs/imaginaryctf-2025/passwordless-web/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/boardlight-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/cap-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/cicada-windows-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/devvortex-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/driver-windows-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/goodgames-linux-not-so-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/jerry-windows-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/paper-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/sau-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/retired-machines/writeup-linux-easy/</loc>
+  </url><url>
+    <loc>http://localhost:1313/android_malware/</loc>
+  </url><url>
     <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/ctfs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/hackthebox/</loc>
   </url><url>
     <loc>http://localhost:1313/</loc>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-  </url><url>
-    <loc>http://localhost:1313/writeups/</loc>
   </url>
 </urlset>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Enumeration
+
+Run an nmap scan
+found ftp, ssh and http ports open on the machine
+first I will try to access ftp and see if there is anything useful there
+&ndash; so turns out that i cant log into anonymous on ftp
+I tried sqlmap to test for sql injections, doesnt seem like it
+now using gobuster to look for directories i can access
+I got stuck
+
+answer
+
+test around the website and change the id on /data/[id]
+get the past pcap files and look through for credentials
+found credentials
+use it to log through ftp and ssh
+user.txt
+now its time for privilege escalation
+we download linpeas.sh script that looks for ways to escalate privileges in linux
+run a python server
+curl the file and pipe it into bash
+we found &lsquo;Files with capabilities (limited to 50):
+/usr/bin/python3.8 = cap_setuid,cap_net_bind_service&#43;eip&rsquo;
+they gave this file permissions so that they can run administrative functions like netstat on the http server
+now we just need to run that version of python and give it commands to give us root
+import os; os.setuid(0); os.system(&quot;/bin/bash&quot;)
+">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/hackthebox/retired-machines/cap-linux-easy/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/hackthebox/retired-machines/cap-linux-easy/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="Khonshu Writeups">
+  <meta property="og:description" content="Enumeration Run an nmap scan found ftp, ssh and http ports open on the machine first I will try to access ftp and see if there is anything useful there – so turns out that i cant log into anonymous on ftp I tried sqlmap to test for sql injections, doesnt seem like it now using gobuster to look for directories i can access I got stuck answer test around the website and change the id on /data/[id] get the past pcap files and look through for credentials found credentials use it to log through ftp and ssh user.txt now its time for privilege escalation we download linpeas.sh script that looks for ways to escalate privileges in linux run a python server curl the file and pipe it into bash we found ‘Files with capabilities (limited to 50): /usr/bin/python3.8 = cap_setuid,cap_net_bind_service&#43;eip’ they gave this file permissions so that they can run administrative functions like netstat on the http server now we just need to run that version of python and give it commands to give us root import os; os.setuid(0); os.system(&#34;/bin/bash&#34;)">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="hackthebox">
+
+  <meta itemprop="name" content="Khonshu Writeups">
+  <meta itemprop="description" content="Enumeration Run an nmap scan found ftp, ssh and http ports open on the machine first I will try to access ftp and see if there is anything useful there – so turns out that i cant log into anonymous on ftp I tried sqlmap to test for sql injections, doesnt seem like it now using gobuster to look for directories i can access I got stuck answer test around the website and change the id on /data/[id] get the past pcap files and look through for credentials found credentials use it to log through ftp and ssh user.txt now its time for privilege escalation we download linpeas.sh script that looks for ways to escalate privileges in linux run a python server curl the file and pipe it into bash we found ‘Files with capabilities (limited to 50): /usr/bin/python3.8 = cap_setuid,cap_net_bind_service&#43;eip’ they gave this file permissions so that they can run administrative functions like netstat on the http server now we just need to run that version of python and give it commands to give us root import os; os.setuid(0); os.system(&#34;/bin/bash&#34;)">
+  <meta itemprop="wordCount" content="181">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Khonshu Writeups">
+  <meta name="twitter:description" content="Enumeration Run an nmap scan found ftp, ssh and http ports open on the machine first I will try to access ftp and see if there is anything useful there – so turns out that i cant log into anonymous on ftp I tried sqlmap to test for sql injections, doesnt seem like it now using gobuster to look for directories i can access I got stuck answer test around the website and change the id on /data/[id] get the past pcap files and look through for credentials found credentials use it to log through ftp and ssh user.txt now its time for privilege escalation we download linpeas.sh script that looks for ways to escalate privileges in linux run a python server curl the file and pipe it into bash we found ‘Files with capabilities (limited to 50): /usr/bin/python3.8 = cap_setuid,cap_net_bind_service&#43;eip’ they gave this file permissions so that they can run administrative functions like netstat on the http server now we just need to run that version of python and give it commands to give us root import os; os.setuid(0); os.system(&#34;/bin/bash&#34;)">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Cap (linux Easy)">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          Khonshu Writeups
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+      
+        Cap (Linux Easy)
+      
+    </h1>
+
+    <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>Run an nmap scan</li>
+<li>found ftp, ssh and http ports open on the machine</li>
+<li>first I will try to access ftp and see if there is anything useful there
+&ndash; so turns out that i cant log into anonymous on ftp</li>
+<li>I tried sqlmap to test for sql injections, doesnt seem like it</li>
+<li>now using gobuster to look for directories i can access</li>
+<li>I got stuck</li>
+</ul>
+<h2 id="answer">answer</h2>
+<ul>
+<li>test around the website and change the id on /data/[id]</li>
+<li>get the past pcap files and look through for credentials</li>
+<li>found credentials</li>
+<li>use it to log through ftp and ssh</li>
+<li>user.txt</li>
+<li>now its time for privilege escalation</li>
+<li>we download linpeas.sh script that looks for ways to escalate privileges in linux</li>
+<li>run a python server</li>
+<li>curl the file and pipe it into bash</li>
+<li>we found &lsquo;Files with capabilities (limited to 50):
+/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip&rsquo;</li>
+<li>they gave this file permissions so that they can run administrative functions like netstat on the http server</li>
+<li>now we just need to run that version of python and give it commands to give us root</li>
+<li><code>import os; os.setuid(0); os.system(&quot;/bin/bash&quot;)</code></li>
+</ul>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,11 @@
+## Enumeration
+- nmap scan found ssh and http open
+- First we notice that the author says there is a DoS protection script running
+- And we have his email so we know the domain to add to etc/hosts
+- I tried gobuster on t 3 and got banned so i have to reset the machine
+- nmap showed there is a directory blocked in robots.txt /writeup
+- opened it and it runs with cms made simple in 2019, i found its config file and thus its version
+- Looked and found a blind time based sql injection vulnerability
+	- Pretty much it passes an argument and if it's true then the site executes TIME(5) to take it 5 sec to load
+	- so i downloaded a script that goes through one by one each letter of the password and user to get the right letters
+- 

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Enumeration
+
+So we run an nmap scan as usual
+we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown)
+lets try accessing port 80 from the browser
+
+Didnt work
+
+
+Now lets try accessing port 55555 to know whats on there
+
+We find a basket website powered by request-baskets
+
+
+We have  request-baskets | Version: 1.2.1 so we can look for vulnerabilities in that software
+So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80
+
+Exploitation
+
+now we opened port 80, and we find it running some software
+we look up vulnerablilities for that software and find an exploit ready to use
+we use it and it give us a reverse shell into the machine
+
+Escalation
+
+so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password
+and we look up systemctl vulnerabilities
+turns out that when you run it, if the output is too much it will run it through less  with root permission
+so we can run commands through less to get bin/bash as root
+">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/hackthebox/retired-machines/sau-linux-easy/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/hackthebox/retired-machines/sau-linux-easy/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="Khonshu Writeups">
+  <meta property="og:description" content="Enumeration So we run an nmap scan as usual we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown) lets try accessing port 80 from the browser Didnt work Now lets try accessing port 55555 to know whats on there We find a basket website powered by request-baskets We have request-baskets | Version: 1.2.1 so we can look for vulnerabilities in that software So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80 Exploitation now we opened port 80, and we find it running some software we look up vulnerablilities for that software and find an exploit ready to use we use it and it give us a reverse shell into the machine Escalation so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password and we look up systemctl vulnerabilities turns out that when you run it, if the output is too much it will run it through less with root permission so we can run commands through less to get bin/bash as root">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="hackthebox">
+
+  <meta itemprop="name" content="Khonshu Writeups">
+  <meta itemprop="description" content="Enumeration So we run an nmap scan as usual we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown) lets try accessing port 80 from the browser Didnt work Now lets try accessing port 55555 to know whats on there We find a basket website powered by request-baskets We have request-baskets | Version: 1.2.1 so we can look for vulnerabilities in that software So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80 Exploitation now we opened port 80, and we find it running some software we look up vulnerablilities for that software and find an exploit ready to use we use it and it give us a reverse shell into the machine Escalation so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password and we look up systemctl vulnerabilities turns out that when you run it, if the output is too much it will run it through less with root permission so we can run commands through less to get bin/bash as root">
+  <meta itemprop="wordCount" content="208">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Khonshu Writeups">
+  <meta name="twitter:description" content="Enumeration So we run an nmap scan as usual we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown) lets try accessing port 80 from the browser Didnt work Now lets try accessing port 55555 to know whats on there We find a basket website powered by request-baskets We have request-baskets | Version: 1.2.1 so we can look for vulnerabilities in that software So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80 Exploitation now we opened port 80, and we find it running some software we look up vulnerablilities for that software and find an exploit ready to use we use it and it give us a reverse shell into the machine Escalation so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password and we look up systemctl vulnerabilities turns out that when you run it, if the output is too much it will run it through less with root permission so we can run commands through less to get bin/bash as root">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Sau (linux Easy)">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          Khonshu Writeups
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+      
+        Sau (Linux Easy)
+      
+    </h1>
+
+    <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>So we run an nmap scan as usual</li>
+<li>we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown)</li>
+<li>lets try accessing port 80 from the browser
+<ul>
+<li>Didnt work</li>
+</ul>
+</li>
+<li>Now lets try accessing port 55555 to know whats on there
+<ul>
+<li>We find a basket website powered by request-baskets</li>
+</ul>
+</li>
+<li>We have  <a href="https://github.com/darklynx/request-baskets">request-baskets</a> | Version: 1.2.1 so we can look for vulnerabilities in that software</li>
+<li>So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80</li>
+</ul>
+<h2 id="exploitation">Exploitation</h2>
+<ul>
+<li>now we opened port 80, and we find it running some software</li>
+<li>we look up vulnerablilities for that software and find an exploit ready to use</li>
+<li>we use it and it give us a reverse shell into the machine</li>
+</ul>
+<h2 id="escalation">Escalation</h2>
+<ul>
+<li>so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password</li>
+<li>and we look up systemctl vulnerabilities</li>
+<li>turns out that when you run it, if the output is too much it will run it through less  with root permission</li>
+<li>so we can run commands through less to get bin/bash as root</li>
+</ul>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

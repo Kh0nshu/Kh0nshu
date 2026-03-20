@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>CTF | Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+    
+      <link href="/ctfs/index.xml" rel="alternate" type="application/rss+xml" title="Khonshu Writeups" />
+      <link href="/ctfs/index.xml" rel="feed" type="application/rss+xml" title="Khonshu Writeups" />
+      
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/ctfs/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/ctfs/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="CTF">
+  <meta property="og:description" content="My CTF writeups.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="CTF">
+  <meta itemprop="description" content="My CTF writeups.">
+  <meta itemprop="wordCount" content="3">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CTF">
+  <meta name="twitter:description" content="My CTF writeups.">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-section is-section">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          CTF
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <section class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
+      CTF
+    </h1>
+
+    <p>My CTF writeups.</p>
+
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1.5rem;">
+      
+        <a href="/ctfs/blackhat-mea-qualification-2025/cute_csp/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
+          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+            
+              Cute Csp
+            
+          </h2>
+
+          
+            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+              <h2 id="prompt">Prompt</h2>
+<p>So cute&hellip; so quirky&hellip;</p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>The home page has php code that prints whatever you put if you add ?html= to the url</li>
+<li>There is an admin page that needs an admin token to access (this seems to be the goal)</li>
+<li>They have a bot that logs in as admin and tests for XSS?</li>
+<li>When you try opening the admin.php page it prints &lsquo;Oops! Invalid admin token&rsquo;
+<ul>
+<li>You have to be logging in from local host and have an admin token</li>
+<li>The source code shows that if you have FL money in your inventory it will show the flag <code> printf(&quot;Final Inventory %-5s : %s\n&quot;, $cur, $cur === 'FL' ? getenv('DYN_FLAG') : $qty);</code></li>
+<li>So we somehow have to get into admin.php and make it buy FL  money</li>
+</ul>
+</li>
+<li>Maybe we can somehow use by accessing it  through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output?</li>
+<li>report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to
+<ul>
+<li>we need to figure out a way for us to access admin.php through index.php</li>
+<li>admin.php will give the flag if we do a post request to buy FL money</li>
+</ul>
+</li>
+</ul>
+            </p>
+          
+        </a>
+      
+        <a href="/ctfs/imaginaryctf-2025/imaginary-notes-web/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
+          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+            
+              Imaginary Notes (Web)
+            
+          </h2>
+
+          
+            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+              <h2 id="prompt">Prompt</h2>
+<p>I made a new note taking app using Supabase! Its so secure, I put my flag as the password to the &ldquo;admin&rdquo; account. I even put my anonymous key somewhere in the site. The password database is called, &ldquo;users&rdquo;.</p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>So the hint tells us that the main goal is to get the admin password</li>
+<li>The fact that it tells us that the password database is in &lsquo;users&rsquo; means that we probably need to make an sql injection of some sort.</li>
+<li>Scratch that, i just found the api key in a request to supabase. That is probably the anonymous key he is talking about
+<ul>
+<li>While playing around with the application and proxying using Burpsuite, I captured a GET request to supabase with the header <code>GET /rest/v1/users?select=id&amp;username=eq.testingman</code></li>
+<li>and with <code>Apikey:</code></li>
+</ul>
+</li>
+<li>First thought is what if I send that to intruder and edit it so that it returns the password to the admin? (aka the flag)</li>
+<li>so we edited the header to <code>GET /rest/v1/users?select=password&amp;username=eq.admin</code></li>
+</ul>
+<h2 id="flag">Flag</h2>
+<ul>
+<li>ictf{why_d1d_1_g1v3_u_my_@p1_k3y???}</li>
+</ul>
+            </p>
+          
+        </a>
+      
+        <a href="/ctfs/imaginaryctf-2025/passwordless-web/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
+          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+            
+              Passwordless (Web)
+            
+          </h2>
+
+          
+            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
+              <h2 id="prompt">Prompt</h2>
+<p>Didn&rsquo;t have time to implement the email sending feature but that&rsquo;s ok, the site is 100% secure if nobody knows their password to sign in!</p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>First of all I&rsquo;ll have the source code open and the website open and figure out how it works as we go.</li>
+<li>The website greets us with a login page and give us a hint that it doesn&rsquo;t send emails to give the initial password
+<ul>
+<li>it seems to use a function normalizeEmail to trim special characters</li>
+</ul>
+</li>
+<li>Our goal should be to log in without a password since it doesn&rsquo;t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page)</li>
+</ul>
+<h3 id="inputs">Inputs</h3>
+<ul>
+<li>So the next stage is to look at how this website processes our inputs
+<ul>
+<li>It seems like it normalizes the email but not the password</li>
+<li>and it looks like it does protect itself against SQL injection with this line <code>db.get(</code>SELECT * FROM users WHERE email = ?<code>, [email], (err, user) </code></li>
+</ul>
+</li>
+<li>What are the conditions set for us to be redirected to dashboard?
+<ul>
+<li>if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard</li>
+<li>the way request.session.user is set is by logging in and passing the authenticate function</li>
+</ul>
+</li>
+<li>How do we log in?
+<ul>
+<li>we register an account and it then creates an initial password that uses the email(not normalized)+16 random bytes</li>
+<li>Then it uses bcrypt.hash to hash the random initial password and then save it in the database</li>
+<li><em>2 hours of questioning life and repeatedly looking through code pass by</em>
+<ul>
+<li>I have no idea what bcrypt.hash does so lets look it up</li>
+<li>First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns
+<ul>
+<li>only the first 72 bytes of the string actually get used</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The normalized email must be less than 64 in length</li>
+<li>So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64</li>
+<li>Looking up how normalizeEmail works
+<ul>
+<li>trims whitespace, lowcases domain, does gmail specific rules like removing &lsquo;.&rsquo;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>So if we make an email <code>'test' + '.' * 58 + '@gmail.com</code> so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password.</li>
+</ul>
+<h2 id="flag">Flag</h2>
+<p>ictf{8ee2ebc4085927c0dc85f07303354a05}</p>
+            </p>
+          
+        </a>
+      
+    </div>
+  </section>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

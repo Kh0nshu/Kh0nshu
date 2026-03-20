@@ -2,3 +2,20 @@ baseURL = 'https://kh0nshu.github.io/'
 languageCode = 'en-us'
 title = 'Khonshu Writeups'
 theme = 'ananke'
+[menus]
+  
+  [[menus.main]]
+    name = "Android Malware"
+    pageRef = "/Android_Malware"
+    weight = 10
+
+  [[menus.main]]
+    name = "CTF"
+    pageRef = "/CTFS"
+    weight = 20
+
+  [[menus.main]]
+    name = "HackTheBox"
+    pageRef = "/HackTheBox"
+    weight = 30
+

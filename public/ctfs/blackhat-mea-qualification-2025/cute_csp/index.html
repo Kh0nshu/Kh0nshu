@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Prompt
+So cute&hellip; so quirky&hellip;
+Enumeration
+
+The home page has php code that prints whatever you put if you add ?html= to the url
+There is an admin page that needs an admin token to access (this seems to be the goal)
+They have a bot that logs in as admin and tests for XSS?
+When you try opening the admin.php page it prints &lsquo;Oops! Invalid admin token&rsquo;
+
+You have to be logging in from local host and have an admin token
+The source code shows that if you have FL money in your inventory it will show the flag  printf(&quot;Final Inventory %-5s : %s\n&quot;, $cur, $cur === &#39;FL&#39; ? getenv(&#39;DYN_FLAG&#39;) : $qty);
+So we somehow have to get into admin.php and make it buy FL  money
+
+
+Maybe we can somehow use by accessing it  through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output?
+report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to
+
+we need to figure out a way for us to access admin.php through index.php
+admin.php will give the flag if we do a post request to buy FL money
+
+
+">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/ctfs/blackhat-mea-qualification-2025/cute_csp/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/ctfs/blackhat-mea-qualification-2025/cute_csp/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="Khonshu Writeups">
+  <meta property="og:description" content="Prompt So cute… so quirky…
+Enumeration The home page has php code that prints whatever you put if you add ?html= to the url There is an admin page that needs an admin token to access (this seems to be the goal) They have a bot that logs in as admin and tests for XSS? When you try opening the admin.php page it prints ‘Oops! Invalid admin token’ You have to be logging in from local host and have an admin token The source code shows that if you have FL money in your inventory it will show the flag printf(&#34;Final Inventory %-5s : %s\n&#34;, $cur, $cur === &#39;FL&#39; ? getenv(&#39;DYN_FLAG&#39;) : $qty); So we somehow have to get into admin.php and make it buy FL money Maybe we can somehow use by accessing it through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output? report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to we need to figure out a way for us to access admin.php through index.php admin.php will give the flag if we do a post request to buy FL money">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="ctfs">
+
+  <meta itemprop="name" content="Khonshu Writeups">
+  <meta itemprop="description" content="Prompt So cute… so quirky…
+Enumeration The home page has php code that prints whatever you put if you add ?html= to the url There is an admin page that needs an admin token to access (this seems to be the goal) They have a bot that logs in as admin and tests for XSS? When you try opening the admin.php page it prints ‘Oops! Invalid admin token’ You have to be logging in from local host and have an admin token The source code shows that if you have FL money in your inventory it will show the flag printf(&#34;Final Inventory %-5s : %s\n&#34;, $cur, $cur === &#39;FL&#39; ? getenv(&#39;DYN_FLAG&#39;) : $qty); So we somehow have to get into admin.php and make it buy FL money Maybe we can somehow use by accessing it through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output? report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to we need to figure out a way for us to access admin.php through index.php admin.php will give the flag if we do a post request to buy FL money">
+  <meta itemprop="wordCount" content="207">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Khonshu Writeups">
+  <meta name="twitter:description" content="Prompt So cute… so quirky…
+Enumeration The home page has php code that prints whatever you put if you add ?html= to the url There is an admin page that needs an admin token to access (this seems to be the goal) They have a bot that logs in as admin and tests for XSS? When you try opening the admin.php page it prints ‘Oops! Invalid admin token’ You have to be logging in from local host and have an admin token The source code shows that if you have FL money in your inventory it will show the flag printf(&#34;Final Inventory %-5s : %s\n&#34;, $cur, $cur === &#39;FL&#39; ? getenv(&#39;DYN_FLAG&#39;) : $qty); So we somehow have to get into admin.php and make it buy FL money Maybe we can somehow use by accessing it through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output? report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to we need to figure out a way for us to access admin.php through index.php admin.php will give the flag if we do a post request to buy FL money">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-cute_csp">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          Khonshu Writeups
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+      
+        Cute Csp
+      
+    </h1>
+
+    <h2 id="prompt">Prompt</h2>
+<p>So cute&hellip; so quirky&hellip;</p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>The home page has php code that prints whatever you put if you add ?html= to the url</li>
+<li>There is an admin page that needs an admin token to access (this seems to be the goal)</li>
+<li>They have a bot that logs in as admin and tests for XSS?</li>
+<li>When you try opening the admin.php page it prints &lsquo;Oops! Invalid admin token&rsquo;
+<ul>
+<li>You have to be logging in from local host and have an admin token</li>
+<li>The source code shows that if you have FL money in your inventory it will show the flag <code> printf(&quot;Final Inventory %-5s : %s\n&quot;, $cur, $cur === 'FL' ? getenv('DYN_FLAG') : $qty);</code></li>
+<li>So we somehow have to get into admin.php and make it buy FL  money</li>
+</ul>
+</li>
+<li>Maybe we can somehow use by accessing it  through the the index page that lets us load images from anywhere to load from report.php to make the bot access admin.php and buy FL money and give us the output?</li>
+<li>report.php just needs you to pass ?url=http://localhost:5000/index to run the bot to
+<ul>
+<li>we need to figure out a way for us to access admin.php through index.php</li>
+<li>admin.php will give the flag if we do a post request to buy FL money</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

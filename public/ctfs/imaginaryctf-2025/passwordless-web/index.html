@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Prompt
+Didn&rsquo;t have time to implement the email sending feature but that&rsquo;s ok, the site is 100% secure if nobody knows their password to sign in!
+Enumeration
+
+First of all I&rsquo;ll have the source code open and the website open and figure out how it works as we go.
+The website greets us with a login page and give us a hint that it doesn&rsquo;t send emails to give the initial password
+
+it seems to use a function normalizeEmail to trim special characters
+
+
+Our goal should be to log in without a password since it doesn&rsquo;t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page)
+
+Inputs
+
+So the next stage is to look at how this website processes our inputs
+
+It seems like it normalizes the email but not the password
+and it looks like it does protect itself against SQL injection with this line db.get(SELECT * FROM users WHERE email = ?, [email], (err, user) 
+
+
+What are the conditions set for us to be redirected to dashboard?
+
+if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard
+the way request.session.user is set is by logging in and passing the authenticate function
+
+
+How do we log in?
+
+we register an account and it then creates an initial password that uses the email(not normalized)&#43;16 random bytes
+Then it uses bcrypt.hash to hash the random initial password and then save it in the database
+2 hours of questioning life and repeatedly looking through code pass by
+
+I have no idea what bcrypt.hash does so lets look it up
+First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns
+
+only the first 72 bytes of the string actually get used
+
+
+
+
+The normalized email must be less than 64 in length
+So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64
+Looking up how normalizeEmail works
+
+trims whitespace, lowcases domain, does gmail specific rules like removing &lsquo;.&rsquo;
+
+
+
+
+So if we make an email &#39;test&#39; &#43; &#39;.&#39; * 58 &#43; &#39;@gmail.com so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password.
+
+Flag
+ictf{8ee2ebc4085927c0dc85f07303354a05}">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/ctfs/imaginaryctf-2025/passwordless-web/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/ctfs/imaginaryctf-2025/passwordless-web/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="Khonshu Writeups">
+  <meta property="og:description" content="Prompt Didn’t have time to implement the email sending feature but that’s ok, the site is 100% secure if nobody knows their password to sign in!
+Enumeration First of all I’ll have the source code open and the website open and figure out how it works as we go. The website greets us with a login page and give us a hint that it doesn’t send emails to give the initial password it seems to use a function normalizeEmail to trim special characters Our goal should be to log in without a password since it doesn’t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page) Inputs So the next stage is to look at how this website processes our inputs It seems like it normalizes the email but not the password and it looks like it does protect itself against SQL injection with this line db.get(SELECT * FROM users WHERE email = ?, [email], (err, user) What are the conditions set for us to be redirected to dashboard? if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard the way request.session.user is set is by logging in and passing the authenticate function How do we log in? we register an account and it then creates an initial password that uses the email(not normalized)&#43;16 random bytes Then it uses bcrypt.hash to hash the random initial password and then save it in the database 2 hours of questioning life and repeatedly looking through code pass by I have no idea what bcrypt.hash does so lets look it up First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns only the first 72 bytes of the string actually get used The normalized email must be less than 64 in length So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64 Looking up how normalizeEmail works trims whitespace, lowcases domain, does gmail specific rules like removing ‘.’ So if we make an email &#39;test&#39; &#43; &#39;.&#39; * 58 &#43; &#39;@gmail.com so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password. Flag ictf{8ee2ebc4085927c0dc85f07303354a05}">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="ctfs">
+
+  <meta itemprop="name" content="Khonshu Writeups">
+  <meta itemprop="description" content="Prompt Didn’t have time to implement the email sending feature but that’s ok, the site is 100% secure if nobody knows their password to sign in!
+Enumeration First of all I’ll have the source code open and the website open and figure out how it works as we go. The website greets us with a login page and give us a hint that it doesn’t send emails to give the initial password it seems to use a function normalizeEmail to trim special characters Our goal should be to log in without a password since it doesn’t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page) Inputs So the next stage is to look at how this website processes our inputs It seems like it normalizes the email but not the password and it looks like it does protect itself against SQL injection with this line db.get(SELECT * FROM users WHERE email = ?, [email], (err, user) What are the conditions set for us to be redirected to dashboard? if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard the way request.session.user is set is by logging in and passing the authenticate function How do we log in? we register an account and it then creates an initial password that uses the email(not normalized)&#43;16 random bytes Then it uses bcrypt.hash to hash the random initial password and then save it in the database 2 hours of questioning life and repeatedly looking through code pass by I have no idea what bcrypt.hash does so lets look it up First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns only the first 72 bytes of the string actually get used The normalized email must be less than 64 in length So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64 Looking up how normalizeEmail works trims whitespace, lowcases domain, does gmail specific rules like removing ‘.’ So if we make an email &#39;test&#39; &#43; &#39;.&#39; * 58 &#43; &#39;@gmail.com so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password. Flag ictf{8ee2ebc4085927c0dc85f07303354a05}">
+  <meta itemprop="wordCount" content="386">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Khonshu Writeups">
+  <meta name="twitter:description" content="Prompt Didn’t have time to implement the email sending feature but that’s ok, the site is 100% secure if nobody knows their password to sign in!
+Enumeration First of all I’ll have the source code open and the website open and figure out how it works as we go. The website greets us with a login page and give us a hint that it doesn’t send emails to give the initial password it seems to use a function normalizeEmail to trim special characters Our goal should be to log in without a password since it doesn’t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page) Inputs So the next stage is to look at how this website processes our inputs It seems like it normalizes the email but not the password and it looks like it does protect itself against SQL injection with this line db.get(SELECT * FROM users WHERE email = ?, [email], (err, user) What are the conditions set for us to be redirected to dashboard? if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard the way request.session.user is set is by logging in and passing the authenticate function How do we log in? we register an account and it then creates an initial password that uses the email(not normalized)&#43;16 random bytes Then it uses bcrypt.hash to hash the random initial password and then save it in the database 2 hours of questioning life and repeatedly looking through code pass by I have no idea what bcrypt.hash does so lets look it up First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns only the first 72 bytes of the string actually get used The normalized email must be less than 64 in length So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64 Looking up how normalizeEmail works trims whitespace, lowcases domain, does gmail specific rules like removing ‘.’ So if we make an email &#39;test&#39; &#43; &#39;.&#39; * 58 &#43; &#39;@gmail.com so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password. Flag ictf{8ee2ebc4085927c0dc85f07303354a05}">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Passwordless (web)">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          Khonshu Writeups
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+      
+        Passwordless (Web)
+      
+    </h1>
+
+    <h2 id="prompt">Prompt</h2>
+<p>Didn&rsquo;t have time to implement the email sending feature but that&rsquo;s ok, the site is 100% secure if nobody knows their password to sign in!</p>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>First of all I&rsquo;ll have the source code open and the website open and figure out how it works as we go.</li>
+<li>The website greets us with a login page and give us a hint that it doesn&rsquo;t send emails to give the initial password
+<ul>
+<li>it seems to use a function normalizeEmail to trim special characters</li>
+</ul>
+</li>
+<li>Our goal should be to log in without a password since it doesn&rsquo;t send an email with the temporary password. ( a glance at dashboard.ejs shows that the flag is on that page)</li>
+</ul>
+<h3 id="inputs">Inputs</h3>
+<ul>
+<li>So the next stage is to look at how this website processes our inputs
+<ul>
+<li>It seems like it normalizes the email but not the password</li>
+<li>and it looks like it does protect itself against SQL injection with this line <code>db.get(</code>SELECT * FROM users WHERE email = ?<code>, [email], (err, user) </code></li>
+</ul>
+</li>
+<li>What are the conditions set for us to be redirected to dashboard?
+<ul>
+<li>if req.session.user returns true, you can pass the restrict and authenticated functions and be redirected to the dashboard</li>
+<li>the way request.session.user is set is by logging in and passing the authenticate function</li>
+</ul>
+</li>
+<li>How do we log in?
+<ul>
+<li>we register an account and it then creates an initial password that uses the email(not normalized)+16 random bytes</li>
+<li>Then it uses bcrypt.hash to hash the random initial password and then save it in the database</li>
+<li><em>2 hours of questioning life and repeatedly looking through code pass by</em>
+<ul>
+<li>I have no idea what bcrypt.hash does so lets look it up</li>
+<li>First thing that comes up when looking up bcrypt.hash documentation is security issues and concerns
+<ul>
+<li>only the first 72 bytes of the string actually get used</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The normalized email must be less than 64 in length</li>
+<li>So the none normalized, which is used in creating the password can be more than that, but once normalized it should me less than 64</li>
+<li>Looking up how normalizeEmail works
+<ul>
+<li>trims whitespace, lowcases domain, does gmail specific rules like removing &lsquo;.&rsquo;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>So if we make an email <code>'test' + '.' * 58 + '@gmail.com</code> so that it has 72 bytes, then bcrypt.hash should only use those 72 letters to make the initial password.</li>
+</ul>
+<h2 id="flag">Flag</h2>
+<p>ictf{8ee2ebc4085927c0dc85f07303354a05}</p>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Khonshu Writeups</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Enumeration
+
+As usual we will be running an nmap scan to start first
+It has a bunch of open ports, port 80, 445, and 5985 stand out
+
+80 and 5985 are running http
+445 is smb
+135 is running msrpc, which you could send it a function to run and tell you the result
+
+
+First lets check the http ports
+
+it prompts asking for a password and username, &ldquo;admin admin&rdquo; works.
+It&rsquo;s a firmware update center
+You can upload a file and the website runs on php
+
+possible reverse shell?
+
+
+has the domain driver.htb so lets add that to /etc/hosts
+
+
+The nmap script says that it was able to connect to smb as a guest account so let&rsquo;s see what we can find
+
+for some reason i can&rsquo;t log in as guest
+
+
+There has to be something that we can do with the firmware updates page to upload some sort of malicious file.
+
+uploading php reverse shell doesn&rsquo;t work because its not executing it
+apparently the files you upload get sent to their smb
+
+
+
+Learned
+
+smb share scf file attack
+
+you upload an scf file with specific commands
+run responder -I tun0
+get the NTLM hash of the user
+
+
+When you have credentials use evil-winrm to connect to windows remote management (WinRM)
+
+evil-winrm -i {ip} -u {user} -p &#39;password&#39;
+
+
+Apparently there is a file that shows the powershell history of the user
+">
+    <meta name="generator" content="Hugo 0.158.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/hackthebox/retired-machines/driver-windows-easy/">
+    
+
+    
+    
+    <meta property="og:url" content="http://localhost:1313/hackthebox/retired-machines/driver-windows-easy/">
+  <meta property="og:site_name" content="Khonshu Writeups">
+  <meta property="og:title" content="Khonshu Writeups">
+  <meta property="og:description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="hackthebox">
+
+  <meta itemprop="name" content="Khonshu Writeups">
+  <meta itemprop="description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
+  <meta itemprop="wordCount" content="232">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Khonshu Writeups">
+  <meta name="twitter:description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
+
+	
+  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Driver (Windows Easy)">
+    
+
+  <header>
+    <div class="pb3-m pb6-l bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        Khonshu Writeups
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
+              Android Malware
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
+              CTF
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
+              HackTheBox
+            </a>
+          </li>
+          
+        </ul>
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv3 ph3 ph4-ns">
+        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
+          Khonshu Writeups
+        </h1>
+        
+      </div>
+    </div>
+  </header>
+
+
+    <main class="pb7" role="main">
+      
+  <article class="mw8 center ph3 ph4-ns pv4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
+      
+        Driver (Windows Easy)
+      
+    </h1>
+
+    <h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>As usual we will be running an nmap scan to start first</li>
+<li>It has a bunch of open ports, port 80, 445, and 5985 stand out
+<ul>
+<li>80 and 5985 are running http</li>
+<li>445 is smb</li>
+<li>135 is running msrpc, which you could send it a function to run and tell you the result</li>
+</ul>
+</li>
+<li>First lets check the http ports
+<ul>
+<li>it prompts asking for a password and username, &ldquo;admin admin&rdquo; works.</li>
+<li>It&rsquo;s a firmware update center</li>
+<li>You can upload a file and the website runs on php
+<ul>
+<li>possible reverse shell?</li>
+</ul>
+</li>
+<li>has the domain driver.htb so lets add that to /etc/hosts</li>
+</ul>
+</li>
+<li>The nmap script says that it was able to connect to smb as a guest account so let&rsquo;s see what we can find
+<ul>
+<li>for some reason i can&rsquo;t log in as guest</li>
+</ul>
+</li>
+<li>There has to be something that we can do with the firmware updates page to upload some sort of malicious file.
+<ul>
+<li>uploading php reverse shell doesn&rsquo;t work because its not executing it</li>
+<li>apparently the files you upload get sent to their smb</li>
+</ul>
+</li>
+</ul>
+<h2 id="learned">Learned</h2>
+<ul>
+<li>smb share scf file attack
+<ul>
+<li>you upload an scf file with specific commands</li>
+<li>run <code>responder -I tun0</code></li>
+<li>get the NTLM hash of the user</li>
+</ul>
+</li>
+<li>When you have credentials use evil-winrm to connect to windows remote management (WinRM)
+<ul>
+<li><code>evil-winrm -i {ip} -u {user} -p 'password'</code></li>
+</ul>
+</li>
+<li>Apparently there is a file that shows the powershell history of the user</li>
+</ul>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
+    &copy;  Khonshu Writeups 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
