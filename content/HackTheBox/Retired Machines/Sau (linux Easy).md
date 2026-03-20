@@ -1,3 +1,10 @@
+---
+title: "Sau (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - So we run an nmap scan as usual
 - we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown)

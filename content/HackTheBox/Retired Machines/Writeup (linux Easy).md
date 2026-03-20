@@ -1,3 +1,10 @@
+---
+title: "Writeup (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - nmap scan found ssh and http open
 - First we notice that the author says there is a DoS protection script running

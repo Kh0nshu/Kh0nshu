@@ -2,4 +2,7 @@
 title: "Khonshu Writeups"
 ---
 
-My Android malware analysis, CTF notes, and HackTheBox writeups. Use the navigation bar above to access them!
+## My CyberSecuirty WriteUps!
+Android malware analysis, CTF notes, and reverse-engineering writeups.
+
+## Most Recent

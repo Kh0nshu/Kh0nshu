@@ -1,171 +1,121 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>Khonshu Writeups</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Enumeration
+<html lang="en" dir="auto" data-theme="dark">
 
-As usual we will be running an nmap scan to start first
-It has a bunch of open ports, port 80, 445, and 5985 stand out
+<head><script src="/Kh0nshu/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Kh0nshu/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Driver (Windows Easy) | Khonshu Writeups</title>
+<meta name="keywords" content="">
+<meta name="description" content="Retired machine">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/driver-windows-easy/">
+<link crossorigin="anonymous" href="/Kh0nshu/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/Kh0nshu/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Kh0nshu/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Kh0nshu/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/Kh0nshu/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/Kh0nshu/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/driver-windows-easy/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-80 and 5985 are running http
-445 is smb
-135 is running msrpc, which you could send it a function to run and tell you the result
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.querySelector("html").dataset.theme = 'light';
+    }
 
-
-First lets check the http ports
-
-it prompts asking for a password and username, &ldquo;admin admin&rdquo; works.
-It&rsquo;s a firmware update center
-You can upload a file and the website runs on php
-
-possible reverse shell?
-
-
-has the domain driver.htb so lets add that to /etc/hosts
-
-
-The nmap script says that it was able to connect to smb as a guest account so let&rsquo;s see what we can find
-
-for some reason i can&rsquo;t log in as guest
-
-
-There has to be something that we can do with the firmware updates page to upload some sort of malicious file.
-
-uploading php reverse shell doesn&rsquo;t work because its not executing it
-apparently the files you upload get sent to their smb
-
-
-
-Learned
-
-smb share scf file attack
-
-you upload an scf file with specific commands
-run responder -I tun0
-get the NTLM hash of the user
-
-
-When you have credentials use evil-winrm to connect to windows remote management (WinRM)
-
-evil-winrm -i {ip} -u {user} -p &#39;password&#39;
-
-
-Apparently there is a file that shows the powershell history of the user
-">
-    <meta name="generator" content="Hugo 0.158.0">
-    
-    
-    
-      <meta name="robots" content="noindex, nofollow">
-    
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-
-    
-
-
-    
-      
-
-    
-
-    
-
-    
-      <link rel="canonical" href="http://localhost:1313/hackthebox/retired-machines/driver-windows-easy/">
-    
-
-    
-    
-    <meta property="og:url" content="http://localhost:1313/hackthebox/retired-machines/driver-windows-easy/">
-  <meta property="og:site_name" content="Khonshu Writeups">
-  <meta property="og:title" content="Khonshu Writeups">
-  <meta property="og:description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="hackthebox">
-
-  <meta itemprop="name" content="Khonshu Writeups">
-  <meta itemprop="description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
-  <meta itemprop="wordCount" content="232">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Khonshu Writeups">
-  <meta name="twitter:description" content="Enumeration As usual we will be running an nmap scan to start first It has a bunch of open ports, port 80, 445, and 5985 stand out 80 and 5985 are running http 445 is smb 135 is running msrpc, which you could send it a function to run and tell you the result First lets check the http ports it prompts asking for a password and username, “admin admin” works. It’s a firmware update center You can upload a file and the website runs on php possible reverse shell? has the domain driver.htb so lets add that to /etc/hosts The nmap script says that it was able to connect to smb as a guest account so let’s see what we can find for some reason i can’t log in as guest There has to be something that we can do with the firmware updates page to upload some sort of malicious file. uploading php reverse shell doesn’t work because its not executing it apparently the files you upload get sent to their smb Learned smb share scf file attack you upload an scf file with specific commands run responder -I tun0 get the NTLM hash of the user When you have credentials use evil-winrm to connect to windows remote management (WinRM) evil-winrm -i {ip} -u {user} -p &#39;password&#39; Apparently there is a file that shows the powershell history of the user">
-
-	
-  </head><body class="ma0 avenir bg-near-white development is-page is-page page-Driver (Windows Easy)">
-    
-
-  <header>
-    <div class="pb3-m pb6-l bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l center items-center justify-between">
-    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
-      
-        Khonshu Writeups
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-        <ul class="pl0 mr3">
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
-              Android Malware
-            </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
-              CTF
-            </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
-              HackTheBox
-            </a>
-          </li>
-          
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/Kh0nshu/" accesskey="h" title="Khonshu Writeups (Alt + H)">Khonshu Writeups</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/android_malware/" title="Android Malware">
+                    <span>Android Malware</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/ctfs/" title="CTFs">
+                    <span>CTFs</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/hackthebox/" title="HackTheBox">
+                    <span>HackTheBox</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
         </ul>
-      
-      <div class="ananke-socials"></div>
+    </nav>
+</header>
+<main class="main">
 
-    </div>
-  </div>
-</nav>
-
-      <div class="tc-l pv3 ph3 ph4-ns">
-        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          Khonshu Writeups
-        </h1>
-        
-      </div>
-    </div>
-  </header>
-
-
-    <main class="pb7" role="main">
-      
-  <article class="mw8 center ph3 ph4-ns pv4">
-    <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">
-      
-        Driver (Windows Easy)
-      
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/Kh0nshu/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/Kh0nshu/hackthebox/">Hack The Box</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Driver (Windows Easy)
     </h1>
+    <div class="post-meta"><span>2 min</span>&nbsp;·&nbsp;<span>232 words</span>
 
-    <h2 id="enumeration">Enumeration</h2>
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#enumeration" aria-label="Enumeration">Enumeration</a></li>
+                <li>
+                    <a href="#learned" aria-label="Learned">Learned</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="enumeration">Enumeration<a hidden class="anchor" aria-hidden="true" href="#enumeration">#</a></h2>
 <ul>
 <li>As usual we will be running an nmap scan to start first</li>
 <li>It has a bunch of open ports, port 80, 445, and 5985 stand out
@@ -199,7 +149,7 @@ Apparently there is a file that shows the powershell history of the user
 </ul>
 </li>
 </ul>
-<h2 id="learned">Learned</h2>
+<h2 id="learned">Learned<a hidden class="anchor" aria-hidden="true" href="#learned">#</a></h2>
 <ul>
 <li>smb share scf file attack
 <ul>
@@ -216,18 +166,151 @@ Apparently there is a file that shows the powershell history of the user
 <li>Apparently there is a file that shows the powershell history of the user</li>
 </ul>
 
-  </article>
 
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
-    &copy;  Khonshu Writeups 2026 
-  </a>
-    <div><div class="ananke-socials"></div>
-</div>
   </div>
-</footer>
 
-  </body>
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/devvortex-linux-easy/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Devvortex (Linux Easy)</span>
+  </a>
+  <a class="next" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/goodgames-linux-not-so-easy/">
+    <span class="title">Next »</span>
+    <br>
+    <span>GoodGames (Linux NOT So Easy)</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/Kh0nshu/">Khonshu Writeups</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
 </html>

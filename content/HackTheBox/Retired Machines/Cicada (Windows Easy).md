@@ -1,3 +1,10 @@
+---
+title: "Cicada (Windows Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - As usual run a full nmap scan of the machine
 	- we find an overwhelming 13 ports open

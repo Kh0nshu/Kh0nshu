@@ -1,3 +1,10 @@
+---
+title: "BoardLight (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - As usual, we run an nmap scan:
 	- We find that we have 2 tcp ports open, ssh and http

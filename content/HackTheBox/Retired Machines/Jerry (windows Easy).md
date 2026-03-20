@@ -1,3 +1,10 @@
+---
+title: "Jerry (Windows Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 
 ## Enumeration
 - nmap scan shows that port 8080 is open with Apache Tomcat/7.0.88 running on it

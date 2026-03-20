@@ -1,3 +1,10 @@
+---
+title: "GoodGames (Linux NOT So Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration 
 - so I've been messing around this website for a while and trying sql injection techniques i know and nothing has been working.
 - When i got frustrated i checked the machine info and it says that it has an sql injection vulnerability so I'm going to have to go through the walkthrough to understand

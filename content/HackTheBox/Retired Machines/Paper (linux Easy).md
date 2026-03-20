@@ -1,3 +1,10 @@
+---
+title: "Paper (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - So we run an nmap scan and find out that ssh, http, and https are open
 - we open the site on firefox and its just an http server test page

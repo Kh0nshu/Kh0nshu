@@ -1,3 +1,10 @@
+---
+title: "Cap (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 
 ## Enumeration
 - Run an nmap scan

@@ -1,21 +1,51 @@
-baseURL = 'https://kh0nshu.github.io/'
+baseURL = 'https://kh0nshu.github.io/Kh0nshu/'
 languageCode = 'en-us'
 title = 'Khonshu Writeups'
-theme = 'ananke'
-[menus]
-  
-  [[menus.main]]
+theme = 'PaperMod'
+
+[pagination]
+  pagerSize = 3
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  defaultTheme = "dark"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  ShowWordCount = true
+  mainSections = ["Android_Malware", "CTFS", "HackTheBox"]
+  disableSpecial1stPost = true
+
+[menu]
+
+  [[menu.main]]
+    identifier = "android-malware"
     name = "Android Malware"
-    pageRef = "/Android_Malware"
+    url = "/Android_Malware/"
     weight = 10
 
-  [[menus.main]]
-    name = "CTF"
-    pageRef = "/CTFS"
+
+  [[menu.main]]
+    identifier = "ctfs"
+    name = "CTFs"
+    url = "/CTFS/"
     weight = 20
 
-  [[menus.main]]
+  [[menu.main]]
+    identifier = "hackthebox"
     name = "HackTheBox"
-    pageRef = "/HackTheBox"
+    url = "/HackTheBox/"
     weight = 30
-
+  
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    url = "/search/"
+    weight = 40

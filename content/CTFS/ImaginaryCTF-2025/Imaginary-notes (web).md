@@ -1,3 +1,10 @@
+---
+title: "ImaginaryCTF 2025   Imaginary Notes (Web)"
+draft: false
+type: "CTFS"
+summary: "Prompt:I made a new note taking app using Supabase! Its so secure, I put my flag as the password to the admin account. I even put my anonymous key somewhere in the site. The password database is called, users."
+---
+
 ## Prompt 
 I made a new note taking app using Supabase! Its so secure, I put my flag as the password to the "admin" account. I even put my anonymous key somewhere in the site. The password database is called, "users".
 

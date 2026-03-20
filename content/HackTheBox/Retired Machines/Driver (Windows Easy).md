@@ -1,3 +1,10 @@
+---
+title: "Driver (Windows Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration
 - As usual we will be running an nmap scan to start first
 - It has a bunch of open ports, port 80, 445, and 5985 stand out

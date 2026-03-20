@@ -1,3 +1,10 @@
+---
+title: "Devvortex (Linux Easy)"
+draft: false
+type: "HackTheBox"
+summary: "Retired machine"
+---
+
 ## Enumeration 
 - so this has ssh and http open
 -  i tried some very basic sql injection into the contact us and the subscribe but it doesnt seem to do much
