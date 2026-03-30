@@ -1,56 +1,37 @@
 {
   "main": {
-    "id": "69e4cd44ef4aa7c7",
+    "id": "45c9745f1c92bae4",
     "type": "split",
     "children": [
       {
-        "id": "664cb709251a5907",
+        "id": "ef828a4728c02530",
         "type": "tabs",
         "children": [
           {
-            "id": "d00c2900217f0562",
+            "id": "f0da186d5f69155d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "EDALAT.apk.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "EDALAT.apk"
-            }
-          },
-          {
-            "id": "6cfdb9d3f2e01681",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Pinned.apk(CTF).md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Pinned.apk(CTF)"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "d521efb2018c54ee",
+    "id": "8c9857bafeb4477d",
     "type": "split",
     "children": [
       {
-        "id": "8684536de48cf9f1",
+        "id": "32d7fdae687cc390",
         "type": "tabs",
         "children": [
           {
-            "id": "d4d918a0cf4cbaa3",
+            "id": "ad09bc7e2260415c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -63,7 +44,7 @@
             }
           },
           {
-            "id": "d5d6d5cffbe07507",
+            "id": "90f7d3df2e11044d",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -80,7 +61,7 @@
             }
           },
           {
-            "id": "e4a8aa64d1856536",
+            "id": "9f3ebe3e7eb3b9d5",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -96,20 +77,19 @@
     "width": 300
   },
   "right": {
-    "id": "c666fb41aaad9345",
+    "id": "86a7f39e7ed7fb94",
     "type": "split",
     "children": [
       {
-        "id": "a8d020609a481263",
+        "id": "f9fd9986d356f170",
         "type": "tabs",
         "children": [
           {
-            "id": "781808e67dd86e62",
+            "id": "8ad22a7699a04545",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pinned.apk(CTF).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,25 +99,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Pinned.apk(CTF)"
+              "title": "Backlinks"
             }
           },
           {
-            "id": "6edd84b27f2cab20",
+            "id": "3872af2aab2fffd4",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Pinned.apk(CTF).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Pinned.apk(CTF)"
+              "title": "Outgoing links"
             }
           },
           {
-            "id": "77dc63b64d9f9e7f",
+            "id": "7859502a8dc20869",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -152,7 +131,7 @@
             }
           },
           {
-            "id": "c47cf798f1ed28ad",
+            "id": "c950671fb0d59574",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -166,18 +145,17 @@
             }
           },
           {
-            "id": "227895a62a5c5188",
+            "id": "7f9e2a7a5ec203a1",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pinned.apk(CTF).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Pinned.apk(CTF)"
+              "title": "Outline"
             }
           }
         ]
@@ -198,12 +176,6 @@
       "bases:Create new base": false
     }
   },
-  "active": "6cfdb9d3f2e01681",
-  "lastOpenFiles": [
-    "Pasted image 20260328163913.png",
-    "Pinned.apk(CTF).md",
-    "Pasted image 20260328163908.png",
-    "EDALAT.apk.md",
-    "freefollowers.apk.md"
-  ]
+  "active": "f0da186d5f69155d",
+  "lastOpenFiles": []
 }
