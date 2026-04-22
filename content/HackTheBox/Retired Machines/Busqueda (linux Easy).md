@@ -2,10 +2,9 @@
 title: Busqueda (Linux Easy)
 draft: false
 type: HackTheBox
-summary: Retired machine
+summary: Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module.
 date: 2026-04-22T10:00:00-05:00
 ---
-## Enumeration
 - nmap scan found ssh and http ports open'
 - we found a domain name to add to /etc/hosts searcher.htb
 - we are directed to a webpage with just one text input
