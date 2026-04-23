@@ -13,7 +13,7 @@ date: 2026-04-22T10:00:00-05:00
 - Then used Wappalyzer to look at the tech stack and frame work of the site.
 	- Looking for any vulnerabilities in the version of python or flask
 - Looked down in the site, it says Powered by [Flask](https://flask.palletsprojects.com) and [Searchor 2.4.0](https://github.com/ArjunSharda/Searchor)
-	- A quick search for vulnerbilities in searcher 2.4.0
+	- A quick search for vulnerabilities in searcher 2.4.0
 	- Found an arbitrary code execution vulnerability, now i have a remote shell
 	- user flag `ed99432243fdc24e0f22d623ddaad8d3`
 
