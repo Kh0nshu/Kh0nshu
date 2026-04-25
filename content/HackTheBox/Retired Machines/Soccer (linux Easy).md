@@ -11,8 +11,8 @@ summary: Retired machine
 - lets run `gobuster dir -u http://soccer.htb -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt`
 - we find a directory that wasn't linked /tiny
 - It gives us a log in to tinyfilemanager
-- inspecting the page gives us the version number and now we have the default admin password to log in with
-- We find a file we can write to and put a reverse shell in and connect to it.
+- inspecting the page gives us the version number and now we have the default admin password to log in with `admin` and `admin@123`
+- We find `CVE-2021-40964` a file we can write to and put a reverse shell in and connect to it.
 
 ## Part 2
 - we found an nginx config file with another vertual host to check
